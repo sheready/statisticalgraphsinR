@@ -1,0 +1,235 @@
+---
+title: "statistical graphics"
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r}
+WorldPhones51 <- WorldPhones[1, ]
+WorldPhones51
+```
+```{r}
+WorldPhones51
+```
+```{r}
+barplot(WorldPhones51)
+```
+```{r}
+barplot(WorldPhones51, cex.names = 0.75, cex.axis = 0.75,
+main = "Numbers of Telephones in 1951")
+```
+```{r}
+dotchart(WorldPhones51, xlab = "Numbers of Phones (’000s)")
+```
+```{r}
+VADeaths
+```
+```{r}
+barplot(VADeaths, beside = TRUE, legend = TRUE, ylim = c(0, 90),
+ylab = "Deaths per 1000",
+main = "Death rates in Virginia")
+```
+```{r}
+dotchart(VADeaths, xlim = c(0, 75), xlab = "Deaths per 1000",
+main = "Death rates in Virginia", cex = 0.8)
+```
+```{r}
+groupsizes <- c(18, 30, 32, 10, 10)
+labels <- c("A", "B", "C", "D", "F")
+pie(groupsizes, labels,
+col = c("green", "white", "grey", "black", "red"))
+```
+```{r}
+hist(log(1000*islands, 10), xlab = "Area (on base 10 log scale)",
+main = "Areas of the World’s Largest Landmasses")
+```
+```{r}
+boxplot(Sepal.Length ~ Species, data = iris,
+ylab = "Sepal length (cm)", main = "Iris measurements",
+boxwex = 0.5)
+```
+```{r}
+x <- rnorm(100) # assigns 100 random normal observations to x
+y <- rpois(100, 30) # assigns 100 random Poisson observations
+# to y; mean value is 30
+mean(y)
+
+```
+```{r}
+plot(x, y, main = "Poisson versus Normal")
+```
+
+```{r}
+plot(x, y, pch = 16) 
+ 
+
+```
+```{r}
+plot(x, y, type = 1)
+```
+```{r}
+plot(sort(x), sort(y), type = ’l’)
+```
+```{r}
+unique(as.character(Orange$Tree))
+```
+
+
+```{r}
+```
+```{r}
+plot(circumference ~ age, data = Orange)
+```
+```{r}
+plot(circumference ~ age, data = Orange, pch = as.character(Tree),
+cex = 0.75)
+```
+```{r}
+par(mfrow = c(1,4))
+X <- rnorm(1000)
+A <- rnorm(1000)
+qqplot(X, A, main = "A and X are the same")
+B <- rnorm(1000, mean = 3, sd = 2)
+qqplot(X, B, main = "B is rescaled X")
+C <- rt(1000, df = 2)
+qqplot(X, C, main = "C has heavier tails")
+D <- rexp(1000)
+qqplot(X, D, main = "D is skewed to the right")
+```
+```{r}
+plot(circumference ~ age, pch = as.numeric(as.character(Tree)),
+data = Orange)
+
+```
+```{r}
+plot(circumference ~ age, pch = as.numeric(as.character(Tree)),
+data = Orange)
+abline(lm(circumference ~ age, data = Orange, subset = Tree == "1"),
+lty = 1)
+abline(lm(circumference ~ age, data = Orange, subset = Tree == "2"),
+lty = 2)
+abline(lm(circumference ~ age, data = Orange, subset = Tree == "3"),
+lty = 3, lwd = 2)
+abline(lm(circumference ~ age, data = Orange, subset = Tree == "4"),
+lty = 4)
+abline(lm(circumference ~ age, data = Orange, subset = Tree == "5"),
+lty = 5)
+legend("topleft", legend = paste("Tree", 1:5), lty = 1:5, pch = 1:5,
+lwd = c(1, 1, 2, 1, 1))
+```
+```{r}
+par(mar = c(5, 5, 5, 5) + 0.1)
+plot(c(1, 9), c(0, 50), type = 'n', xlab = "", ylab = "")
+```
+```{r}
+par(mar = c(5, 5, 5, 5) + 0.1)
+plot(c(1, 9), c(0, 50), type = 'n', xlab = "", ylab = "")
+text(6, 40, "Plot region")
+points(6, 20)
+text(6, 20, "(6, 20)", adj = c(0.5, 2))
+mtext(paste("Margin", 1:4), side = 1:4, line = 3)
+mtext(paste("Line", 0:4), side = 1, line = 0:4, at = 3, cex = 0.6)
+mtext(paste("Line", 0:4), side = 2, line = 0:4, at = 15, cex = 0.6)
+mtext(paste("Line", 0:4), side = 3, line = 0:4, at = 3, cex = 0.6)
+mtext(paste("Line", 0:4), side = 4, line = 0:4, at = 15, cex = 0.6)
+```
+```{r}
+hist(log(1000*islands, 10), axes = FALSE, xlab = "Area (in sq. miles)",
+main = "Areas of the World’s Largest Islands")
+box()
+axis(side = 1, at = 4:7, labels = c("10,000", "100,000", "1,000,000",
+"10,000,000"))
+axis(side = 2)
+```
+```{r}
+boxplot(motor, ylab = "Vibration", axes = FALSE)
+title("Motor Vibration Data")
+mtext("The Effects of Different Bearings", side = 3, line = 0)
+box()
+axis(side = 2, las = 2)
+axis(side = 1, at = 1:5, label = names(motor))
+```
+```{r}
+motor
+```
+```{r}
+boxplot(motor)
+```
+
+
+
+```{r}
+par(list = list(mfrow = c(3, 2), mar = c(2.5,2.1,0.1,0.1)))
+Z <- rnorm(1000)
+hist(Z, main = "")
+hist(Z, breaks = "Freedman-Diaconis", main = "")
+plot(density(Z), main = "")
+boxplot(Z)
+qqnorm(Z, main = ""); qqline(Z)
+ts.plot(Z)
+```
+
+
+```{r}
+WorldPhones51 <- WorldPhones[1, ]
+WorldPhones51
+library(ggplot2)
+region <- names(WorldPhones51)
+phones51 <- data.frame(Region = factor(region, levels = region),
+Telephones = WorldPhones51)
+ggplot(phones51, aes(Region, Telephones)) + geom_bar(stat = "identity")
+```
+```{r}
+WorldPhones51 <- WorldPhones[1, ]
+WorldPhones51
+library(lattice)
+phones <- data.frame(Year = as.numeric(rep(rownames(WorldPhones), 7)),
+Region = rep(colnames(WorldPhones), each = 7),
+Telephones = as.numeric(WorldPhones))
+xyplot(Telephones ~ Year | Region, data = phones)
+```
+```{r}
+library(grid)
+grid.rect() 
+vp <- viewport(h = .4, w = .6, angle = 60)
+pushViewport(vp)
+grid.rect(gp = gpar(col = "red")) 
+pushViewport(vp) 
+grid.rect(gp = gpar(col = "blue"))
+```
+
+
+```{r}
+library(leaflet)
+leaflet() %>%
+addTiles() %>%
+addMarkers(lng = 174.768, lat = -36.852, popup = "The birthplace of R")
+```
+
+
+```{r}
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
